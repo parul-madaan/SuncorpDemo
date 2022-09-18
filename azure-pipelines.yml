@@ -17,7 +17,7 @@ steps:
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
-    projectJsonPath: '$(Build.SourceDirectory)'
+    projectJsonPath: '$(Build.SourcesDirectory)'
     outputType: 'Process'
     orchestratorConnection: 'StagingTAM-ANZ'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
