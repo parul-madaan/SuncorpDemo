@@ -21,9 +21,7 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'StagingTAM-ANZ'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-  env:
-    OrchestratorClientIdOverride: 'ADLqfy4M6cRUaEL6XOxiKpMqyPvjTuUi'
-    OrchestratorAuthorizationUriOverride: 'https://id-preprod.uipath.com/'
+
 
 - task: UiPathDeploy@2
   inputs:
