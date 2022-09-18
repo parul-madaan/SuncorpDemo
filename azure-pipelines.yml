@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+- group: CICDVariables
+
 steps:
 - script: echo start pipeline
 - task: UiPathPack@2
@@ -18,6 +21,9 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'StagingTAM-ANZ'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+  env:
+    OrchestratorClientIdOverride: '$(ClientId)'
+    OrchestratorAuthorizationUriOverride: '$(AuthUriOverride)'
 
 - task: UiPathDeploy@2
   inputs:
