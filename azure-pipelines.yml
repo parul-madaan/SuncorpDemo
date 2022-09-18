@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- script: echo start pipeline
+- task: UiPathPack@2
+  inputs:
+    versionType: 'AutoVersion'
+    projectJsonPath: '$(Build.SourceDirectory)'
+    outputType: 'Process'
+    orchestratorConnection: 'StagingTAM-ANZ'
+    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+
+- task: UiPathDeploy@2
+  inputs:
+    orchestratorConnection: 'StagingTAM-ANZ'
+    packagesPath: '$(Build.ArtifactStagingDirectory)'
+    folderName: 'ParulDemo'
+    entryPoints: 'SHA_Check.xaml'
+
+
