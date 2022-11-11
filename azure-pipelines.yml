@@ -11,7 +11,7 @@ pool:
 
 
 steps:
-- script: echo start pipeline
+- script: echo Start deployment pipeline
 - task: UiPathPack@2
   inputs:
     versionType: 'AutoVersion'
@@ -19,15 +19,12 @@ steps:
     outputType: 'Process'
     orchestratorConnection: 'StagingTAM-ANZ'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-  env:
-    OrchestratorClientIdOverride: 'ADLqfy4M6cRUaEL6XOxiKpMqyPvjTuUi'
-    OrchestratorAuthorizationUriOverride: 'https://id-preprod.uipath.com/'
 
 
 - task: UiPathDeploy@2
   inputs:
     orchestratorConnection: 'StagingTAM-ANZ'
-    packagesPath: '$(Build.ArtifactStagingDirectory)'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
     folderName: 'ParulDemo'
     entryPoints: 'SHA_Check.xaml'
 
